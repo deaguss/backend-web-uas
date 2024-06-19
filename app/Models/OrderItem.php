@@ -25,7 +25,7 @@ class OrderItem extends Model
         JOIN menus ON order_items.menu_id = menus.id
         ";
 
-        return $this->getJoin($customQuery);
+        return $this->get($customQuery);
     }
 
     public function create($data)

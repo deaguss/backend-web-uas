@@ -11,21 +11,9 @@ class Model extends Database
         parent::__construct();
     }
 
-    public function get()
+    public function get($customQuery = null)
     {
-        $query = mysqli_query($this->db, "SELECT * FROM $this->table");
-        $data = array();
-
-        while ($temp = mysqli_fetch_object($query)) {
-            $data[] = $temp;
-        }
-
-        return $data;
-    }
-
-    public function getJoin($customQuery)
-    {
-        $query = mysqli_query($this->db, $customQuery);
+        $query = mysqli_query($this->db, $customQuery ?? "SELECT * FROM $this->table");
         $data = array();
 
         while ($temp = mysqli_fetch_object($query)) {
