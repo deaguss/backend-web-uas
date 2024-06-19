@@ -22,7 +22,6 @@ class AuthController extends Controller
                 'message' => "The credential that you have provided didn't match any data in our system."
             ];
             Redirect::to('/');
-            exit;
         }
 
         $_SESSION['id'] = $user->id;

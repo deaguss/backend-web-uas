@@ -23,14 +23,17 @@
                             <td class="py-3 px-6 font-bold"><?= $item->menu_name ?> </td>
                             <td class="py-3 px-6"><?= $item->quantity ?></td>
                             <td class="py-3 px-6">
-                                <p class="bg-orange-400 text-white py-0.5 text-center px-2 rounded-full inline text-sm font-semibold">Progres</p>
+                                <p class="<?= $item->order_status === 'ready' ? 'bg-green-400' : 'bg-red-400' ?> text-white py-0.5 text-center px-2 rounded-full inline text-sm font-semibold"><?= $item->order_status ?></p>
                             </td>
                             <td class="py-3 px-6">
                                 <?php if (!$readyButtonDisplayed): ?>
-                                    <form action="/menu" method="POST">
+                                    <form action="/order" method="POST">
                                         <input type="hidden" name="_method" value="PUT">
                                         <input type="hidden" name="order_id" value="<?= $item->order_id ?>">
-                                        <button type="submit" class="hover:bg-red-600 px-5 py-2 bg-red-500 rounded-lg text-white">Ready</button>
+                                        <button type="submit"
+                                       <?= $item->order_status === 'ready' ? 'disabled' : '' ?>
+
+                                        class="hover:bg-red-600 px-5 py-2 bg-red-500 rounded-lg text-white" >Ready</button>
                                     </form>
                                     <?php $readyButtonDisplayed = true; ?>
                                 <?php endif; ?>

@@ -20,6 +20,7 @@ class HomeController extends Controller
         $orders = [];
     
         foreach ($orderItem as $item) {
+            
             $orders[$item->order_id][] = $item;
         }
 

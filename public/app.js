@@ -5,13 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   addToCartButtons.forEach((button) => {
     button.addEventListener("click", function (event) {
-      event.preventDefault();
+      event.preventDefault(); // Prevent the default link behavior
 
       const productId = this.dataset.productId;
       const productName = this.dataset.productName;
       const productImage = this.dataset.productImage;
       const productPrice = parseFloat(this.dataset.productPrice);
-      const quantity = 1;
+      const quantity = 1; // Default quantity
 
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -37,28 +37,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  if (cart.length === 0) {
-    submitCartButton.style.display = "none";
-  } else {
-    submitCartButton.style.display = "block";
-  }
-
   if (submitCartButton) {
-    submitCartButton.addEventListener("click", function (event) {
-      event.preventDefault();
-
+    submitCartButton.addEventListener("click", function () {
       const cart = JSON.parse(localStorage.getItem("cart"));
       const cartInput = document.getElementById("cart-input");
       cartInput.value = JSON.stringify(cart);
 
+      // Submit the form
       cartForm.submit();
+      // Reset local storage after checkout
+      localStorage.removeItem("cart");
     });
   }
 
+  // Function to update the cart view in the modal
   function updateCartView() {
     const cartItemsContainer = document.getElementById("cart-items");
     const totalPriceElement = document.getElementById("total-price");
-    cartItemsContainer.innerHTML = "";
+    cartItemsContainer.innerHTML = ""; // Clear existing items
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     let totalPrice = 0;
@@ -116,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     totalPriceElement.innerText = `$${totalPrice.toFixed(2)}`;
 
+    // Add event listeners to remove buttons
     const removeItemButtons = document.querySelectorAll(".remove-item");
     removeItemButtons.forEach((button) => {
       button.addEventListener("click", function () {
@@ -126,11 +123,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Function to remove an item from the cart
   function removeItemFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.filter((item) => item.productId !== productId);
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 
+  // Initialize cart view
   updateCartView();
 });

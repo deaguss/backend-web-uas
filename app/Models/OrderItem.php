@@ -19,6 +19,7 @@ class OrderItem extends Model
         $customQuery = "
         SELECT order_items.id as order_item_id, order_items.order_id, order_items.menu_id, order_items.quantity, order_items.price,
                orders.created_at as order_date,
+               orders.status as order_status,
                menus.name as menu_name
         FROM order_items
         JOIN orders ON order_items.order_id = orders.id

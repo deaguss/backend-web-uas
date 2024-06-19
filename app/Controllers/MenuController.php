@@ -25,8 +25,12 @@ class MenuController extends Controller
         ];
 
         if ((new Menu())->addMenu($menuData)) {
+            $_SESSION['success'] = [
+                'title' => "Menu added successfully.",
+                'message' => "The menu has been added successfully."
+            ];
+
             Redirect::to('/');
-            exit;
         } else {
             $_SESSION['error'] = [
                 'title' => "Failed to add menu.",
@@ -46,22 +50,24 @@ class MenuController extends Controller
                 'message' => "Order ID is missing or invalid."
             ];
             Redirect::to('/kitchen');
-            exit;
         }
     
         $order_id = $_POST['order_id'];
 
 
         if ((new Order())->markAsReady($order_id)) {
+            $_SESSION['success'] = [
+                'title' => "Order updated successfully.",
+                'message' => "The order has been updated successfully."
+            ];
+
             Redirect::to('/kitchen');
-            exit;
         } else {
             $_SESSION['error'] = [
                 'title' => "Failed to update order.",
                 'message' => "An error occurred while updating the order."
             ];
             Redirect::to('/kitchen');
-            exit;
         }
     }
     
@@ -88,8 +94,12 @@ class MenuController extends Controller
 
             echo '<script>window.localStorage.removeItem("cart");</script>';
 
+            $_SESSION['success'] = [
+                'title' => "Order added successfully.",
+                'message' => "The order has been added successfully."
+            ];
+
             Redirect::to('/');
-            exit;
         } else {
             $_SESSION['error'] = [
                 'title' => "Failed to add order.",
