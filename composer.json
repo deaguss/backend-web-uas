@@ -1,0 +1,17 @@
+{
+  "name": "afilf/project_uas",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Database\\": "databases/",
+      "Route\\": "routes/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Arthur",
+      "email": "akunvokal@gmail.com"
+    }
+  ],
+  "require": {}
+}
