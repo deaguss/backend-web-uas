@@ -15,21 +15,26 @@ class AuthController extends Controller
         Middleware::forGuest();
         session_start();
         $user = (new User())->auth($data);
-
+    
         if (!$user) {
             $_SESSION['error'] = [
                 'title' => "Invalid credential.",
                 'message' => "The credential that you have provided didn't match any data in our system."
             ];
-            Redirect::to('/');
+            return Redirect::to('/');
         }
-
+    
         $_SESSION['id'] = $user->id;
         $_SESSION['username'] = $user->username;
-
-        Redirect::to('/');
-        exit;
+    
+        $_SESSION['success'] = [
+            'title' => "Login successful.",
+            'message' => "You have successfully logged in to our system."
+        ];
+    
+        return Redirect::to('/');
     }
+    
 
     public function logout()
     {
@@ -37,8 +42,12 @@ class AuthController extends Controller
         session_start();
         session_destroy();
 
-        Redirect::to('/');
-        exit;
+        $_SESSION['success'] = [
+            'title' => "Logout successful.",
+            'message' => "You have successfully logged out of our system."
+        ];
+
+        return Redirect::to('/');
     }
 
 }

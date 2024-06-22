@@ -30,14 +30,15 @@ class MenuController extends Controller
                 'message' => "The menu has been added successfully."
             ];
 
-            Redirect::to('/');
+            return Redirect::to('/');
         } else {
             $_SESSION['error'] = [
                 'title' => "Failed to add menu.",
                 'message' => "An error occurred while adding the menu."
             ];
-        }
-        
+
+            return Redirect::to('/');
+        }  
     }
 
     public function isReady()
@@ -49,7 +50,7 @@ class MenuController extends Controller
                 'title' => "Invalid Order ID",
                 'message' => "Order ID is missing or invalid."
             ];
-            Redirect::to('/kitchen');
+           return Redirect::to('/kitchen');
         }
     
         $order_id = $_POST['order_id'];
@@ -61,13 +62,13 @@ class MenuController extends Controller
                 'message' => "The order has been updated successfully."
             ];
 
-            Redirect::to('/kitchen');
+            return Redirect::to('/kitchen');
         } else {
             $_SESSION['error'] = [
                 'title' => "Failed to update order.",
                 'message' => "An error occurred while updating the order."
             ];
-            Redirect::to('/kitchen');
+           return Redirect::to('/kitchen');
         }
     }
     
@@ -99,12 +100,14 @@ class MenuController extends Controller
                 'message' => "The order has been added successfully."
             ];
 
-            Redirect::to('/');
+            return Redirect::to('/');
         } else {
             $_SESSION['error'] = [
                 'title' => "Failed to add order.",
                 'message' => "An error occurred while adding the order."
             ];
+
+            return Redirect::to('/');
         }
         
     }

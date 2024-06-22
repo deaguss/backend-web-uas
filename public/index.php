@@ -20,14 +20,14 @@ session_start();
     <main>
         <?php
         if (isset($_SESSION['error'])) {
-            echo '<div role="alert" class="rounded border-s-4 border-red-500 bg-red-50 p-4">
+            echo '<div role="alert" class="rounded border-s-4 border-red-500 bg-red-50 p-4 fixed z-50 right-2 bottom-2">
                     <strong class="block font-medium text-red-800">' . htmlspecialchars($_SESSION['error']['title']) . '</strong>
                     <p class="mt-2 text-sm text-red-700">' . htmlspecialchars($_SESSION['error']['message']) . '</p>
                   </div>';
             unset($_SESSION['error']);
         }
         if (isset($_SESSION['success'])) {
-            echo '<div role="alert" class="rounded border-s-4 border-green-500 bg-green-50 p-4">
+            echo '<div role="alert" class="rounded border-s-4 border-green-500 bg-green-50 p-4 fixed z-50 right-2 bottom-2">
                     <strong class="block font-medium text-green-800">' . htmlspecialchars($_SESSION['success']['title']) . '</strong>
                     <p class="mt-2 text-sm text-green-700">' . htmlspecialchars($_SESSION['success']['message']) . '</p>
                   </div>';
